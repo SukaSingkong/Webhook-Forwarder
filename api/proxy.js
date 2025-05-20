@@ -84,21 +84,23 @@ async function processWebhookAsync(requestData) {
     // Contoh: gunakan service proxy eksternal untuk mengatasi batasan
     // CATATAN: Anda perlu mengganti URL ini dengan layanan proxy yang sebenarnya
     // yang dapat meneruskan permintaan ke IP target Anda
-    const proxyServiceUrl = 'https://your-proxy-service.example.com/forward';
+    const proxyServiceUrl = 'http://160.187.210.22:2020'; 
     
     console.log('Sending to proxy service:', proxyServiceUrl);
     console.log('Payload:', JSON.stringify(payload));
     
-    // Kirim ke service proxy (ini hanya contoh)
-    // const proxyResponse = await fetch(proxyServiceUrl, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': 'Bearer ' + process.env.PROXY_SERVICE_KEY
-    //   },
-    //   body: JSON.stringify(payload),
-    //   timeout: 5000
-    // });
+    const proxyResponse = await fetch(proxyServiceUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + process.env.PROXY_SERVICE_KEY // opsional
+        },
+      body: JSON.stringify(payload),
+      timeout: 5000
+    });
+
+return await proxyResponse.json();
+
     
     // return await proxyResponse.json();
     
